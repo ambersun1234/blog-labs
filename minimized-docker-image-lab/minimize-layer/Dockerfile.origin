@@ -1,0 +1,9 @@
+FROM ubuntu:22.04
+
+RUN apt update && apt upgrade -y
+RUN apt install vim -y
+RUN apt install curl -y
+RUN apt install wget -y
+RUN apt install build-essential -y
+RUN apt install make -y
+RUN apt install cmake -y
