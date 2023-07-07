@@ -1,0 +1,50 @@
+{
+  "name": "simple-restful-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
+  "scripts": {
+    "check": "prettier --check \"./src/**/*.{js,jsx,ts,tsx,html,scss}\"",
+    "pretty": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,html,scss}\"",
+    "build": "rm -rf dist && npm run prisma && npx webpack",
+    "prisma": "npx prisma generate --schema ./src/database/prisma/schema.prisma",
+    "dev-server": "concurrently \"npx tsc --watch\" \"nodemon -q ./dist/server.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambersun1234/simple-restful-lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ambersun1234/simple-restful-lab/issues"
+  },
+  "homepage": "https://github.com/ambersun1234/simple-restful-lab#readme",
+  "devDependencies": {
+    "@prisma/client": "4.16.2",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.2",
+    "concurrently": "^8.2.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "dotenv": "^16.3.1",
+    "dotenv-webpack": "8.0.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "http-status-codes": "^2.2.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "prisma": "4.16.2",
+    "prismajs": "^1.0.2",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-obfuscator": "^3.5.1",
+    "winston": "^3.9.0"
+  },
+  "dependencies": {
+    "node-polyfill-webpack-plugin": "^2.0.1"
+  }
+}

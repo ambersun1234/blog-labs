@@ -1,0 +1,14 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+
+npm run check
+if [ "$?" -eq 0 ]; then
+	echo -e "${GREEN}Prettier all passed${NC}"
+else
+	echo -e "${RED}Please format the file before commit${NC}, run ${YELLOW}npm run pretty${NC}"
+	exit 1
+fi

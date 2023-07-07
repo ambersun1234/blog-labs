@@ -1,0 +1,16 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+    engineType    = "binary"
+}
+
+model User {
+    id         Int      @id @default(autoincrement())
+    username   String   @unique
+    created_at DateTime @default(now())
+}
