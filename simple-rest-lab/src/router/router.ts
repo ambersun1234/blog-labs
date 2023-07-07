@@ -12,5 +12,12 @@ router.get(
     middleware.pageNumber(),
     middleware.pageLimit(),
     middleware.validation,
-    userController.getUsers
+    userController.getUsersSlow
+);
+router.get(
+    "/users/fast",
+    middleware.cursor(),
+    middleware.pageLimit(),
+    middleware.validation,
+    userController.getUsersFast
 );

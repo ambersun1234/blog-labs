@@ -12,6 +12,7 @@ export enum Errors {
     InternalServerError = "Internal server error",
     InvalidPageNumber = "Invalid page number",
     InvalidPageLimit = "Invalid page limit",
+    InvalidCursor = "Invalid cursor",
 }
 
 export enum SuccessMessages {

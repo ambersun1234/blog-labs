@@ -12,4 +12,14 @@ export default {
             SELECT * FROM User LIMIT ${pageLimit} OFFSET ${startPoint};
         `;
     },
+
+    findUsersFast: async (
+        tx: PrismaTransaction,
+        cursor: number,
+        pageLimit: number
+    ): Promise<UserResponse[]> => {
+        return tx.$queryRaw`
+            SELECT * FROM User WHERE id > ${cursor} LIMIT ${pageLimit}
+        `;
+    },
 };

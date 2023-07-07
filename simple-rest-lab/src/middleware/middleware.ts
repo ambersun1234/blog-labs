@@ -37,6 +37,8 @@ export default {
                 return true;
             }),
 
+    cursor: () => query("cursor").optional(),
+
     pageLimit: () =>
         query("pageLimit")
             .isString()
