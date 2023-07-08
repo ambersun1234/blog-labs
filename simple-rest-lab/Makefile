@@ -3,6 +3,12 @@ CONTAINER_NAME=db
 DB_NAME=restdb
 CSV_NAME=./user.csv
 
+benchmark:
+	@python3 benchmark.py
+
+plot:
+	@gnuplot ./plot.gp
+
 demo: demo-down
 	@docker-compose up -d
 
