@@ -41,6 +41,8 @@ export default {
 
     username: () => query("username").optional(),
 
+    createdAt: () => query("createdAt").optional(),
+
     pageLimit: () =>
         query("pageLimit")
             .isString()

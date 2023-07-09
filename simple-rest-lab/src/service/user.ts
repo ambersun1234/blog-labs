@@ -72,4 +72,22 @@ export default {
 
         return result;
     },
+
+    getUsersSortMulti: async (username: string, createdAt: Date, pageLimit:number): Promise<UserResponse[]> => {
+        let result: UserResponse[] = [];
+
+        try {
+            await connection.$transaction(async (tx: PrismaTransaction) => {
+                result = await userDB.findUsersSortMulti(
+                    tx, username, createdAt, pageLimit
+                )
+                logger.info("Successfully get users")
+            })
+        } catch (error) {
+            logger.error("Rollback transaction, encounter error", { error: error })
+            throw new Error(Errors.InternalServerError)
+        }
+
+        return result
+    }
 };

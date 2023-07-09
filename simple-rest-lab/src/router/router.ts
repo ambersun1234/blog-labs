@@ -28,3 +28,11 @@ router.get(
     middleware.validation,
     userController.getUsersSortUsername
 );
+router.get(
+    "/users/sort-multi",
+    middleware.username(),
+    middleware.createdAt(),
+    middleware.pageLimit(),
+    middleware.validation,
+    userController.getUsersSortMulti
+)
