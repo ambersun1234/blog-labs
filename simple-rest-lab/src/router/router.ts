@@ -35,4 +35,4 @@ router.get(
     middleware.pageLimit(),
     middleware.validation,
     userController.getUsersSortMulti
-)
+);
