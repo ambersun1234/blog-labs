@@ -6,6 +6,11 @@ This repo contains the minimal Node.js Backend RESTful API
 
 ```shell
 $ make benchmark
-$ make plot
 $ eog ./benchmark.png
+```
+
+![](./benchmark-sort.png)
+```shell
+$ make benchmark-sort
+$ eog ./benchmark-sort.png
 ```
