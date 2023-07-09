@@ -3,11 +3,13 @@ CONTAINER_NAME=db
 DB_NAME=restdb
 CSV_NAME=./user.csv
 
+benchmark-sort:
+	@python3 benchmark-sort.py
+	@gnuplot ./benchmark-sort-plot.gp
+
 benchmark:
 	@python3 benchmark.py
-
-plot:
-	@gnuplot ./plot.gp
+	@gnuplot ./benchmark-plot.gp
 
 demo: demo-down
 	@docker-compose up -d
@@ -55,7 +57,7 @@ prisma:
 
 migrate-prisma:
 	@export DATABASE_URL=mysql://root:root@localhost:6630/$(DB_NAME) && \
-		npx prisma migrate dev --schema $(SCHEMA_LOCATION)
+		npx prisma migrate dev --name init --schema $(SCHEMA_LOCATION)
 
 hook:
 	@bash ./scripts/install-hook.sh
