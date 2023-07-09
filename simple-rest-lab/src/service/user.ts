@@ -47,4 +47,29 @@ export default {
 
         return result;
     },
+
+    getUsersSortUsername: async (
+        username: string,
+        pageLimit: number
+    ): Promise<UserResponse[]> => {
+        let result: UserResponse[] = [];
+
+        try {
+            await connection.$transaction(async (tx: PrismaTransaction) => {
+                result = await userDB.findUsersSortUsername(
+                    tx,
+                    username,
+                    pageLimit
+                );
+                logger.info("Successfully get users");
+            });
+        } catch (error) {
+            logger.error("Rollback transaction, encounter error", {
+                error: error,
+            });
+            throw new Error(Errors.InternalServerError);
+        }
+
+        return result;
+    },
 };

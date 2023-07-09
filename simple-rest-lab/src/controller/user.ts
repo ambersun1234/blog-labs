@@ -45,4 +45,23 @@ export default {
             );
         }
     },
+
+    getUsersSortUsername: async (req: Request, res: Response) => {
+        try {
+            const data = matchedData(req);
+
+            const result = await userService.getUsersSortUsername(
+                data.username || "",
+                data.pageLimit
+            );
+            res.status(StatusCodes.OK).send(
+                generateResponse(SuccessMessages.GetUsers, result)
+            );
+        } catch (error) {
+            logger.error(Errors.InternalServerError, { error: error });
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(
+                generateResponse(Errors.InternalServerError)
+            );
+        }
+    },
 };

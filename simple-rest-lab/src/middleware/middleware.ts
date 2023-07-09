@@ -39,6 +39,8 @@ export default {
 
     cursor: () => query("cursor").optional(),
 
+    username: () => query("username").optional(),
+
     pageLimit: () =>
         query("pageLimit")
             .isString()

@@ -21,3 +21,10 @@ router.get(
     middleware.validation,
     userController.getUsersFast
 );
+router.get(
+    "/users/sort-name",
+    middleware.username(),
+    middleware.pageLimit(),
+    middleware.validation,
+    userController.getUsersSortUsername
+);

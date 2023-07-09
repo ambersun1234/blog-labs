@@ -22,4 +22,14 @@ export default {
             SELECT * FROM User WHERE id > ${cursor} LIMIT ${pageLimit}
         `;
     },
+
+    findUsersSortUsername: async (
+        tx: PrismaTransaction,
+        cursor: string,
+        pageLimit: number
+    ): Promise<UserResponse[]> => {
+        return tx.$queryRaw`
+            SELECT * FROM User WHERE username > ${cursor} ORDER BY username LIMIT ${pageLimit}
+        `;
+    },
 };
