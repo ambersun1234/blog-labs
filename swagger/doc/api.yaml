@@ -1,0 +1,19 @@
+openapi: 3.1.0
+info:
+  title: Swagger API Test
+  description: This document shows how to use $ref in multiple swagger file
+  version: 1.0.0
+servers: 
+  - url: http://localhost 
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Get server health
+      security: []
+  /cats:
+    $ref: "./cat/cat.yaml#/~1cats"
+  /cat/{catId}:
+    $ref: "./cat/cat.yaml#/~1cat~1%7BcatId%7D"
+  /cat:
+    $ref: "./cat/cat.yaml#/~1cat"

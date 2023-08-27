@@ -1,0 +1,21 @@
+/dogs:
+  get:
+    tags: 
+      - dog
+    operationId: getDogs
+    summary: Get all dogs
+    security: []
+/dog/{dogId}:
+  get:
+    tags: 
+      - dog
+    operationId: getDogById
+    summary: Get dog by id
+    security: []
+/dog:
+  post:
+    tags: 
+      - dog
+    operationId: postNewDog
+    summary: Create new dog
+    security: []

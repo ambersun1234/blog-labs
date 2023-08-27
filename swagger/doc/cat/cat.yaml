@@ -1,0 +1,27 @@
+/cats:
+  get:
+    tags: 
+      - cat
+    operationId: getCats
+    summary: Get all cats
+    security: []
+/cat/{catId}:
+  get:
+    tags: 
+      - cat
+    operationId: getCatById
+    summary: Get cat by id
+    security: []
+    parameters:
+      - name: catId
+        in: path
+        required: true
+        schema:
+          type: number
+/cat:
+  post:
+    tags: 
+      - cat
+    operationId: postNewCat
+    summary: Create new cat
+    security: []

@@ -1,0 +1,16 @@
+{
+  "name": "swagger",
+  "version": "1.0.0",
+  "description": "This repository contains the minimal reproducible swagger code of multiple yamls",
+  "main": "index.js",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "4.18.2",
+    "nodemon": "3.0.1",
+    "swagger-combine": "1.4.0",
+    "swagger-jsdoc": "6.2.8",
+    "swagger-ui-express": "5.0.0"
+  }
+}
