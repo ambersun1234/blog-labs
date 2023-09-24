@@ -1,0 +1,20 @@
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://admin:admin@localhost:5555/benchmark"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model test {
+    id    Int    @id @default(autoincrement())
+    name  String
+    index String
+    gist  String
+    gin   String
+
+    @@index([index])
+    @@index([gist(ops: raw("gist_trgm_ops"))], type: Gist)
+    @@index([gin(ops: raw("gin_trgm_ops"))], type: Gin)
+}
