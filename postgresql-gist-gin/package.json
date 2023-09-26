@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "benchmark-unique": "npx tsc && node ./benchmark-unique.js"
+    "benchmark-unique": "npx tsc && node ./benchmark/unique/benchmark-unique.js",
+    "benchmark-unique-large": "npx tsc && node ./benchmark/unique-large/benchmark-unique-large.js"
   },
   "author": "",
   "license": "ISC",
