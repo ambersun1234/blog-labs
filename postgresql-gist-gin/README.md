@@ -4,6 +4,7 @@ This project aims to benchmark the difference between GIST and GIN index in post
 ## Benchmark Result
 ### 10w rows of unique data
 ![](./benchmark-unique.png)
+![](./benchmark-unique2.png)
 
 ## Run
 ```shell
