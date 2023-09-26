@@ -1,24 +1,24 @@
 -- CreateTable
-CREATE TABLE "duplicate" (
+CREATE TABLE "unique2" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "index" TEXT NOT NULL,
     "gist" TEXT NOT NULL,
     "gin" TEXT NOT NULL,
 
-    CONSTRAINT "duplicate_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "unique2_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE INDEX "duplicate_index_idx" ON "duplicate"("index");
+CREATE INDEX "unique2_index_idx" ON "unique2"("index");
 
 -- CreateIndex
-CREATE INDEX "duplicate_gist_idx" ON "duplicate" USING GIST ("gist" gist_trgm_ops);
+CREATE INDEX "unique2_gist_idx" ON "unique2" USING GIST ("gist" gist_trgm_ops);
 
 -- CreateIndex
-CREATE INDEX "duplicate_gin_idx" ON "duplicate" USING GIN ("gin" gin_trgm_ops);
+CREATE INDEX "unique2_gin_idx" ON "unique2" USING GIN ("gin" gin_trgm_ops);
 
-COPY "duplicate"(name, index, gist, gin)
-FROM '/duplicate.csv'
+COPY "unique2"(name, index, gist, gin)
+FROM '/unique-large.csv'
 DELIMITER ','
 CSV HEADER;

@@ -7,7 +7,19 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model test {
+model unique {
+    id    Int    @id @default(autoincrement())
+    name  String
+    index String
+    gist  String
+    gin   String
+
+    @@index([index])
+    @@index([gist(ops: raw("gist_trgm_ops"))], type: Gist)
+    @@index([gin(ops: raw("gin_trgm_ops"))], type: Gin)
+}
+
+model unique2 {
     id    Int    @id @default(autoincrement())
     name  String
     index String
