@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
 
 const ITERATION = 10;
 
@@ -10,12 +12,15 @@ const tons = (timestamp: number[]): number => {
 const findName = async (conn: PrismaClient, field: string, name: string) => {
   return await conn.$queryRawUnsafe(`--sql
         select id
-        from test
+        from "unique"
         where similarity(${field}, '${name}') > 0
     `);
 };
 
-const benchmark = async (conn: PrismaClient, name: string): Promise<number[][]> => {
+const benchmark = async (
+  conn: PrismaClient,
+  name: string
+): Promise<number[][]> => {
   const fields = ["name", "index", "gist", "gin"];
 
   let benchmarkResult = new Array(ITERATION);
@@ -37,7 +42,13 @@ const benchmark = async (conn: PrismaClient, name: string): Promise<number[][]> 
 };
 
 const write2file = async (result: number[][]) => {
-  const logger = fs.createWriteStream("./benchmark-unique.txt", { flags: "w" });
+  const logger = fs.createWriteStream(
+    path.join(
+      path.dirname(path.resolve(fileURLToPath(import.meta.url))),
+      "./benchmark-unique.txt"
+    ),
+    { flags: "w" }
+  );
   result.forEach((item, index) => {
     logger.write(`${index} ${item[0]} ${item[1]} ${item[2]} ${item[3]}\n`);
   });
