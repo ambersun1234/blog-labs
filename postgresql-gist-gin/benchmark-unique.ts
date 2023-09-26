@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import * as fs from "fs";
 
-const ITERATION = 100;
+const ITERATION = 10;
 
 const tons = (timestamp: number[]): number => {
   return timestamp[0] * 1e9 + timestamp[1];
