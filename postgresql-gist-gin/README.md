@@ -4,15 +4,13 @@ This project aims to benchmark the difference between GIST and GIN index in post
 ## Benchmark Result
 ### 10w Rows of Unique Data
 ![](./benchmark/unique/benchmark-unique.png)
-![](./benchmark/unique/benchmark-unique2.png)
 
 ### 66w Rows of Unique Data
 ![](./benchmark/unique-large/benchmark-unique-large.png)
-![](./benchmark/unique-large/benchmark-unique-large2.png)
 
 ## Run
 ```shell
-$ docker run -d --name gist-gin-benchmark \
+$ taskset 0x2 docker run -d --name gist-gin-benchmark \
     -p 5555:5432 \
     -e POSTGRES_USER=admin \
     -e POSTGRES_PASSWORD=admin \
@@ -26,11 +24,9 @@ $ npx prisma migrate dev
 
 ## Benchmark
 ```shell
-$ taskset 0x1 npm run benchmark-unique
-$ gnuplot ./benchmark/unique/unique.gp
+$ make benchmark-unique
 
-$ taskset 0x1 npm run benchmark-unique-large
-$ gnuplot ./benchmark/unique/unique-large.gp
+$ make benchmark-unique-large
 ```
 
 ## License

@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
 
-const ITERATION = 10;
+const ITERATION = 100;
 
 const tons = (timestamp: number[]): number => {
   return timestamp[0] * 1e9 + timestamp[1];
@@ -13,7 +13,7 @@ const findName = async (conn: PrismaClient, field: string, name: string) => {
   return await conn.$queryRawUnsafe(`--sql
         select id
         from unique2
-        where similarity(${field}, '${name}') > 0
+        where ${field} % '${name}'
     `);
 };
 
