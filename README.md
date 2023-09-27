@@ -9,3 +9,4 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [Redis Benchmark - Lists vs. Sorted Sets](./redis-lists-sorted-sets-benchmark/)
 + [Simple RESTful Lab](./simple-rest-lab/)
 + [Swagger](./swagger)
++ [PostgreSQL GIST vs. GIN Index Benchmark Testing](./postgresql-gist-gin/)
