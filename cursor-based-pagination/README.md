@@ -1,7 +1,7 @@
-# Simple RESTful Lab
+# Cursor Based Pagination
 This repo contains the minimal Node.js Backend RESTful API
 
-## Cursor Based Pagination
+## Benchmark
 ![](./benchmark.png)
 
 ```shell
