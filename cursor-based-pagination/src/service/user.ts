@@ -13,9 +13,11 @@ export default {
         let result: UserResponse[] = [];
 
         try {
-            await connection.$transaction(async (tx: PrismaTransaction) => {
-                result = await userDB.findUsersSlow(tx, pageNumber, pageLimit);
-            });
+            result = await userDB.findUsersSlow(
+                connection,
+                pageNumber,
+                pageLimit
+            );
             logger.info("Successfully get users");
         } catch (error) {
             logger.error("Rollback transaction, encounter error", {
@@ -34,10 +36,8 @@ export default {
         let result: UserResponse[] = [];
 
         try {
-            await connection.$transaction(async (tx: PrismaTransaction) => {
-                result = await userDB.findUsersFast(tx, cursor, pageLimit);
-                logger.info("Successfully get users");
-            });
+            result = await userDB.findUsersFast(connection, cursor, pageLimit);
+            logger.info("Successfully get users");
         } catch (error) {
             logger.error("Rollback transaction, encounter error", {
                 error: error,
@@ -55,14 +55,12 @@ export default {
         let result: UserResponse[] = [];
 
         try {
-            await connection.$transaction(async (tx: PrismaTransaction) => {
-                result = await userDB.findUsersSortUsername(
-                    tx,
-                    username,
-                    pageLimit
-                );
-                logger.info("Successfully get users");
-            });
+            result = await userDB.findUsersSortUsername(
+                connection,
+                username,
+                pageLimit
+            );
+            logger.info("Successfully get users");
         } catch (error) {
             logger.error("Rollback transaction, encounter error", {
                 error: error,
@@ -81,15 +79,13 @@ export default {
         let result: UserResponse[] = [];
 
         try {
-            await connection.$transaction(async (tx: PrismaTransaction) => {
-                result = await userDB.findUsersSortMulti(
-                    tx,
-                    username,
-                    createdAt,
-                    pageLimit
-                );
-                logger.info("Successfully get users");
-            });
+            result = await userDB.findUsersSortMulti(
+                connection,
+                username,
+                createdAt,
+                pageLimit
+            );
+            logger.info("Successfully get users");
         } catch (error) {
             logger.error("Rollback transaction, encounter error", {
                 error: error,

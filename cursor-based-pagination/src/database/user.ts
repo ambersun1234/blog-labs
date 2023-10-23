@@ -1,45 +1,47 @@
+import { PrismaClient } from "@prisma/client";
+
 import { PrismaTransaction } from "../type/type";
 import { UserResponse } from "../type/response";
 
 export default {
     findUsersSlow: async (
-        tx: PrismaTransaction,
+        conn: PrismaClient,
         pageNumber: number,
         pageLimit: number
     ): Promise<UserResponse[]> => {
         const startPoint = (pageNumber - 1) * pageLimit;
-        return tx.$queryRaw<UserResponse[]>`
+        return conn.$queryRaw<UserResponse[]>`
             SELECT * FROM User LIMIT ${pageLimit} OFFSET ${startPoint};
         `;
     },
 
     findUsersFast: async (
-        tx: PrismaTransaction,
+        conn: PrismaClient,
         cursor: number,
         pageLimit: number
     ): Promise<UserResponse[]> => {
-        return tx.$queryRaw`
+        return conn.$queryRaw`
             SELECT * FROM User WHERE id > ${cursor} LIMIT ${pageLimit}
         `;
     },
 
     findUsersSortUsername: async (
-        tx: PrismaTransaction,
+        conn: PrismaClient,
         cursor: string,
         pageLimit: number
     ): Promise<UserResponse[]> => {
-        return tx.$queryRaw`
+        return conn.$queryRaw`
             SELECT * FROM User WHERE username > ${cursor} ORDER BY username LIMIT ${pageLimit}
         `;
     },
 
     findUsersSortMulti: async (
-        tx: PrismaTransaction,
+        conn: PrismaClient,
         username: string,
         createdAt: Date,
         pageLimit: number
     ): Promise<UserResponse[]> => {
-        return tx.$queryRaw`
+        return conn.$queryRaw`
             SELECT * FROM User
             WHERE (created_at < ${createdAt} OR 
                 (created_at = ${createdAt} AND username > ${username})
