@@ -1,6 +1,12 @@
 # Cursor Based Pagination
 This repo contains the minimal Node.js Backend RESTful API
 
+## Prerequisites
+```shell
+$ make docker-create
+$ make docker-start
+```
+
 ## Benchmark
 ![](./benchmark.png)
 
