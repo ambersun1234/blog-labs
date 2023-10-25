@@ -5,9 +5,7 @@ import { SuccessMessages } from "../constant/constant";
 import { generateResponse } from "../share/share";
 
 export default {
-    healthHandler: async (req: Request, res: Response) => {
-        res.status(StatusCodes.OK).send(
-            generateResponse(SuccessMessages.Success)
-        );
-    },
+  healthHandler: async (req: Request, res: Response) => {
+    res.status(StatusCodes.OK).send(generateResponse(SuccessMessages.Success));
+  },
 };

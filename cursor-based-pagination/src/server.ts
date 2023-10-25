@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(middleware.httpInterceptor);
 app.use("/", router);
 app.all("*", (req: Request, res: Response) => {
-    res.status(StatusCodes.NOT_FOUND).send();
+  res.status(StatusCodes.NOT_FOUND).send();
 });
 
 app.listen(EXPRESS_PORT, () => {
-    logger.info("Server is running", { port: EXPRESS_PORT });
+  logger.info("Server is running", { port: EXPRESS_PORT });
 });

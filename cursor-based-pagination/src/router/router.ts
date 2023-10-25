@@ -8,31 +8,31 @@ export const router = express.Router();
 
 router.get("/", controller.healthHandler);
 router.get(
-    "/users/slow",
-    middleware.pageNumber(),
-    middleware.pageLimit(),
-    middleware.validation,
-    userController.getUsersSlow
+  "/users/slow",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersSlow
 );
 router.get(
-    "/users/fast",
-    middleware.cursor(),
-    middleware.pageLimit(),
-    middleware.validation,
-    userController.getUsersFast
+  "/users/fast",
+  middleware.cursor(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersFast
 );
 router.get(
-    "/users/sort-name",
-    middleware.username(),
-    middleware.pageLimit(),
-    middleware.validation,
-    userController.getUsersSortUsername
+  "/users/sort-name",
+  middleware.username(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersSortUsername
 );
 router.get(
-    "/users/sort-multi",
-    middleware.username(),
-    middleware.createdAt(),
-    middleware.pageLimit(),
-    middleware.validation,
-    userController.getUsersSortMulti
+  "/users/sort-multi",
+  middleware.username(),
+  middleware.createdAt(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersSortMulti
 );

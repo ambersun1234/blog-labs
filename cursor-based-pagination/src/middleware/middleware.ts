@@ -7,53 +7,46 @@ import { generateResponse, parseRequestBody } from "../share/share";
 import { Errors } from "../constant/constant";
 
 export default {
-    httpInterceptor: (req: Request, res: Response, next: NextFunction) => {
-        logger.http("Income request", parseRequestBody(req));
-        next();
-    },
+  httpInterceptor: (req: Request, res: Response, next: NextFunction) => {
+    logger.http("Income request", parseRequestBody(req));
+    next();
+  },
 
-    validation: (req: Request, res: Response, next: NextFunction) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(StatusCodes.BAD_REQUEST).send(
-                generateResponse(errors.array()[0].msg)
-            );
-            return;
-        }
-        next();
-    },
+  validation: (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .send(generateResponse(errors.array()[0].msg));
+      return;
+    }
+    next();
+  },
 
-    pageNumber: () =>
-        query("pageNumber")
-            .isString()
-            .trim()
-            .custom((pageNumber) => {
-                if (pageNumber <= 0) {
-                    logger.error(Errors.InvalidPageNumber, {
-                        pageNumber: pageNumber,
-                    });
-                    throw new Error(Errors.InvalidPageNumber);
-                }
-                return true;
-            }),
+  pageNumber: () =>
+    query("pageNumber").isInt({ min: 1 }).withMessage(Errors.InvalidPageNumber),
 
-    cursor: () => query("cursor").optional(),
+  cursor: () =>
+    query("cursor")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage(Errors.InvalidCursor),
 
-    username: () => query("username").optional(),
+  username: () =>
+    query("username")
+      .optional()
+      .isString()
+      .bail()
+      .withMessage(Errors.InvalidUsername)
+      .isLength({ min: 1 })
+      .withMessage(Errors.InvalidUsername),
 
-    createdAt: () => query("createdAt").optional(),
+  createdAt: () =>
+    query("createdAt")
+      .optional()
+      .isInt({ min: 1 })
+      .withMessage(Errors.InvalidDate),
 
-    pageLimit: () =>
-        query("pageLimit")
-            .isString()
-            .trim()
-            .custom((pageLimit) => {
-                if (pageLimit <= 0) {
-                    logger.error(Errors.InvalidPageLimit, {
-                        pageLimit: pageLimit,
-                    });
-                    throw new Error(Errors.InvalidPageLimit);
-                }
-                return true;
-            }),
+  pageLimit: () =>
+    query("pageLimit").isInt({ min: 1 }).withMessage(Errors.InvalidPageLimit),
 };
