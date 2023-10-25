@@ -3,6 +3,12 @@ CONTAINER_NAME=db
 DB_NAME=restdb
 CSV_NAME=./user.csv
 
+unit-test:
+	@npx jest --bail --testMatch='./**/unittest/**/*.test.ts' --coverage
+
+integration-test:
+	@npx jest --bail --testMatch='./**/integrationtest/**/*.test.ts' --coverage
+
 benchmark-sort:
 	@python3 benchmark-sort.py
 	@gnuplot ./benchmark-sort-plot.gp
