@@ -3,6 +3,9 @@ CONTAINER_NAME=db
 DB_NAME=restdb
 CSV_NAME=./user.csv
 
+test:
+	@npx jest --bail --coverage
+
 unit-test:
 	@npx jest --bail --testMatch='./**/unittest/**/*.test.ts' --coverage
 
