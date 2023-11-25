@@ -16,8 +16,7 @@ $ taskset 0x2 docker run -d --name gist-gin-benchmark \
     -e POSTGRES_PASSWORD=admin \
     -e POSTGRES_DB=benchmark \
     postgres
-$ docker cp fakeData/unique.csv gist-gin-benchmark:/
-$ docker cp fakeData/unique-large.csv gist-gin-benchmark:/
+$ make init
 $ npm i
 $ npx prisma migrate dev
 ```
