@@ -30,3 +30,49 @@ model unique2 {
     @@index([gist(ops: raw("gist_trgm_ops"))], type: Gist)
     @@index([gin(ops: raw("gin_trgm_ops"))], type: Gin)
 }
+
+model strArray {
+    id     Int                     @id @default(autoincrement())
+    origin String[]
+    index  Unsupported("tsvector")?
+    gist   Unsupported("tsvector")?
+    gin    Unsupported("tsvector")?
+
+    @@index([index])
+    @@index([gist], type: Gist)
+    @@index([gin], type: Gin)
+}
+
+model strArray2 {
+    id     Int                     @id @default(autoincrement())
+    origin String[]
+    index  Unsupported("tsvector")?
+    gist   Unsupported("tsvector")?
+    gin    Unsupported("tsvector")?
+
+    @@index([index])
+    @@index([gist], type: Gist)
+    @@index([gin], type: Gin)
+}
+
+model intArray {
+    id    Int   @id @default(autoincrement())
+    index Int[]
+    gist  Int[]
+    gin   Int[]
+
+    @@index([index])
+    @@index([gist(ops: raw("gist__int_ops"))], type: Gist)
+    @@index([gin(ops: raw("gin__int_ops"))], type: Gin)
+}
+
+model intArray2 {
+    id    Int   @id @default(autoincrement())
+    index Int[]
+    gist  Int[]
+    gin   Int[]
+
+    @@index([index])
+    @@index([gist(ops: raw("gist__int_ops"))], type: Gist)
+    @@index([gin(ops: raw("gin__int_ops"))], type: Gin)
+}
