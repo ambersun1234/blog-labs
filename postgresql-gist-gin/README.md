@@ -8,6 +8,12 @@ This project aims to benchmark the difference between GIST and GIN index in post
 ### 66w Rows of Unique Data
 ![](./benchmark/unique-large/benchmark-unique-large.png)
 
+### 10w Rows of String Array with Size 10
+![](./benchmark/string-array/benchmark-string-array.png)
+
+### 10w Rows of String Array with Size 20
+![](./benchmark/string-array-large/benchmark-string-array-large.png)
+
 ## Run
 ```shell
 $ taskset 0x2 docker run -d --name gist-gin-benchmark \

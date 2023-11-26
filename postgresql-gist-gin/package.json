@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "benchmark-unique": "npx tsc && node ./benchmark/unique/benchmark-unique.js",
-    "benchmark-unique-large": "npx tsc && node ./benchmark/unique-large/benchmark-unique-large.js"
+    "benchmark-unique-large": "npx tsc && node ./benchmark/unique-large/benchmark-unique-large.js",
+    "benchmark-string-array": "npx tsc && node ./benchmark/string-array/benchmark-string-array.js",
+    "benchmark-string-array-large": "npx tsc && node ./benchmark/string-array-large/benchmark-string-array-large.js"
   },
   "author": "",
   "license": "ISC",
