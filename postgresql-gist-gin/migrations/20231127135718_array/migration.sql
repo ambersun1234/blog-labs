@@ -1,8 +1,8 @@
 -- CreateTable
 CREATE TABLE "strArray" (
     "id" SERIAL NOT NULL,
-    "origin" TEXT[],
-    "index" tsvector,
+    "raw" TEXT[],
+    "origin" tsvector,
     "gist" tsvector,
     "gin" tsvector,
 
@@ -12,8 +12,8 @@ CREATE TABLE "strArray" (
 -- CreateTable
 CREATE TABLE "strArray2" (
     "id" SERIAL NOT NULL,
-    "origin" TEXT[],
-    "index" tsvector,
+    "raw" TEXT[],
+    "origin" tsvector,
     "gist" tsvector,
     "gin" tsvector,
 
@@ -21,16 +21,10 @@ CREATE TABLE "strArray2" (
 );
 
 -- CreateIndex
-CREATE INDEX "strArray_index_idx" ON "strArray"("index");
-
--- CreateIndex
 CREATE INDEX "strArray_gist_idx" ON "strArray" USING GIST ("gist");
 
 -- CreateIndex
 CREATE INDEX "strArray_gin_idx" ON "strArray" USING GIN ("gin");
-
--- CreateIndex
-CREATE INDEX "strArray2_index_idx" ON "strArray2"("index");
 
 -- CreateIndex
 CREATE INDEX "strArray2_gist_idx" ON "strArray2" USING GIST ("gist");
@@ -43,11 +37,11 @@ FROM '/str-array.csv'
 DELIMITER '@' QUOTE '"' ESCAPE '\'
 CSV HEADER;
 
-UPDATE "strArray" SET index = array_to_tsvector(origin);
-UPDATE "strArray" SET gist = array_to_tsvector(origin);
-UPDATE "strArray" SET gin = array_to_tsvector(origin);
+UPDATE "strArray" SET origin = array_to_tsvector("raw");
+UPDATE "strArray" SET gist = array_to_tsvector("raw");
+UPDATE "strArray" SET gin = array_to_tsvector("raw");
 
-COPY "strArray2"(origin)
+COPY "strArray2"("raw")
 FROM '/str-array-large.csv'
 DELIMITER '@' QUOTE '"' ESCAPE '\'
 CSV HEADER;
