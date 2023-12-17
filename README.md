@@ -10,3 +10,4 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [Simple RESTful Lab](./simple-rest-lab/)
 + [Swagger](./swagger)
 + [PostgreSQL GIST vs. GIN Index Benchmark Testing](./postgresql-gist-gin/)
++ [RabbitMQ](./rabbitmq/)
