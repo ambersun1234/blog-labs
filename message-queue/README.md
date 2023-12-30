@@ -1,6 +1,8 @@
-# RabbitMQ Hello World
+# Message Queue
 
-## Run
+## RabbitMQ Hello World
+
+### Run
 ```shell
 $ make message-queue
 $ go run message-queue.go
