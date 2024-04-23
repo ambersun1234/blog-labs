@@ -19,7 +19,7 @@ def benchmark():
     stub.Echo(echo_pb2.EchoRequest(input="2"))
 
 if __name__ == "__main__":
-    round = 100000
+    round = 10000
     with grpc.insecure_channel('localhost:6600') as channel:
         stub = echo_pb2_grpc.EchoStub(channel)
 
