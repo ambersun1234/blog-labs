@@ -1,0 +1,86 @@
+version: "3.9"
+
+services:
+  tcp_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tcp.server
+    expose:
+      - "6666"
+    environment:
+      - PROTOCOL=tcp
+      - TYPE=server
+    networks:
+      - app
+
+  tcp_client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tcp.client
+    environment:
+      - PROTOCOL=tcp
+      - TYPE=client
+      - HOST=tcp_server
+    restart: always
+    depends_on:
+      - tcp_server
+    networks:
+      - app
+
+  unicast_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unicast.server
+    expose:
+      - "7777"
+    environment:
+      - PROTOCOL=udpu
+      - TYPE=server
+    networks:
+      - app
+
+  unicast_client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unicast.client
+    environment:
+      - PROTOCOL=udpu
+      - TYPE=client
+      - HOST=unicast_server
+    restart: always
+    depends_on:
+      - unicast_server
+    networks:
+      - app
+
+  multicast_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multicast.server
+    environment:
+      - PROTOCOL=udpm
+      - TYPE=server
+    networks:
+      - app
+
+  multicast_client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multicast.client
+    environment:
+      - PROTOCOL=udpm
+      - TYPE=client
+    restart: always
+    depends_on:
+      - multicast_server
+    networks:
+      - app
+
+networks:
+  app:
