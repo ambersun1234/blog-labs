@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      initContainers:
+        - name: wait-for-rabbitmq
+          image: busybox:1.28
+          command:
+            [
+              "sh",
+              "-c",
+              "until nslookup rabbitmq-service; do echo waiting for rabbitmq-service; sleep 2; done",
+            ]
+      containers:
+        - name: producer
+          image: test-producer
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: myconfig
+            - secretRef:
+                name: application-credentials
+          resources:
+            limits:
+              memory: 4096Mi
+              cpu: 1000m
+      volumes:
+        - name: config-volume
+          configMap:
+            name: myconfig
