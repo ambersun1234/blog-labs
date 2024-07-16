@@ -31,10 +31,9 @@ spec:
             - secretRef:
                 name: application-credentials
           resources:
+            requests:
+              memory: 2048Mi
+              cpu: 500m
             limits:
               memory: 4096Mi
               cpu: 1000m
-      volumes:
-        - name: config-volume
-          configMap:
-            name: myconfig
