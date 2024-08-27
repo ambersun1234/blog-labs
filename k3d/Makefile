@@ -8,7 +8,7 @@ image-build:
 	@docker build -t $(CONSUMER_IMAGE) -f ./consumer.dockerfile .
 
 k3d-create:
-	@k3d cluster create $(NAME) -s 3
+	@k3d cluster create $(NAME) -s 1
 	@k3d image import -c $(NAME) $(PRODUCER_IMAGE)
 	@k3d image import -c $(NAME) $(CONSUMER_IMAGE)
 
