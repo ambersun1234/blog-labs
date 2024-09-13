@@ -1,0 +1,26 @@
+version: "3"
+services:
+  # master-slave replication
+  master:
+    image: redis
+    ports:
+      - 6379:6379
+
+  slave:
+    deploy:
+      replicas: 2
+    image: redis
+    command: redis-server --slaveof master 6379
+    depends_on:
+      - master
+
+  # sentinel
+  sentinel:
+    deploy:
+      replicas: 3
+    image: redis
+    volumes:
+      - ./config:/etc/redis-config
+    command: redis-sentinel /etc/redis-config/sentinel.conf
+    depends_on:
+      - master
