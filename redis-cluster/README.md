@@ -4,5 +4,5 @@ This repo contains a simple Redis Cluster/Redis Sentinel setup using Docker Comp
 ## Run
 ```shell
 $ cd sentinel-master-slave
-$ make start
+$ make up
 ```
