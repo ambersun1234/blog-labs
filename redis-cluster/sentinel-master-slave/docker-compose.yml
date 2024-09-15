@@ -36,3 +36,11 @@ services:
     command: redis-sentinel /etc/redis-config/sentinel-3.conf
     depends_on:
       - master
+
+  sentinel-4:
+    image: redis
+    volumes:
+      - ./config:/etc/redis-config
+    command: redis-sentinel /etc/redis-config/sentinel-4.conf
+    depends_on:
+      - master
