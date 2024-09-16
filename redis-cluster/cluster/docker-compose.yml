@@ -1,0 +1,56 @@
+version: "3"
+services:
+  node1:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-1.conf
+
+  node2:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-2.conf
+
+  node3:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-3.conf
+
+  node4:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-4.conf
+
+  node5:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-5.conf
+
+  node6:
+    image: redis
+    volumes:
+      - ./config/:/etc/redis/
+    command: redis-server /etc/redis/redis-6.conf
+
+  cluster:
+    image: redis
+    command: >
+      redis-cli --cluster create
+        node1:7000
+        node2:7000
+        node3:7000
+        node4:7000
+        node5:7000
+        node6:7000
+        --cluster-replicas 1 --cluster-yes
+    depends_on:
+      - node1
+      - node2
+      - node3
+      - node4
+      - node5
+      - node6
