@@ -16,3 +16,4 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [golang-dig](./golang-dig/)
 + [Redis Cluster](./redis-cluster/)
 + [MinIO Webhook](./minio-webhook/)
++ [K8s Controller](./k8s-controller/)

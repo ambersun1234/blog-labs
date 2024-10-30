@@ -1,0 +1,9 @@
+apiVersion: foo.example.com/v1
+kind: Foo
+metadata:
+  labels:
+    app.kubernetes.io/name: k8s-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: foo-sample
+spec:
+  value: hello
