@@ -18,3 +18,4 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [MinIO Webhook](./minio-webhook/)
 + [K8s Controller](./k8s-controller/)
 + [K8s Test](./k8s-test/)
++ [Argo Workflows](./argo-workflow/)
