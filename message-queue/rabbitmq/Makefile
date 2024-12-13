@@ -4,6 +4,8 @@ message-queue:
 		-p 15672:15672 \
 		-e RABBITMQ_DEFAULT_USER=rabbitmq \
 		-e RABBITMQ_DEFAULT_PASS=rabbitmq \
+		-v ./load_definitions.json:/etc/rabbitmq/load_definitions.json \
+		-v ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf \
 		--name rabbitmq \
 		rabbitmq:3.13-rc-management
 
