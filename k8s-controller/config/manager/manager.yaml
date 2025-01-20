@@ -20,7 +20,7 @@ spec:
   selector:
     matchLabels:
       control-plane: controller-manager
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       annotations:
@@ -62,6 +62,11 @@ spec:
         - /manager
         args:
         - --leader-elect
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         image: controller:latest
         imagePullPolicy: Never
         name: manager

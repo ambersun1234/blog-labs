@@ -22,3 +22,5 @@ resources:
 # if you do not want those helpers be installed with your Project.
 - foo_editor_role.yaml
 - foo_viewer_role.yaml
+- buildin_role.yaml
+- buildin_role_binding.yaml
