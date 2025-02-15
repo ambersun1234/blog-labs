@@ -17,6 +17,6 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [Redis Cluster](./redis-cluster/)
 + [MinIO Webhook](./minio-webhook/)
 + [K8s Controller](./k8s-controller/)
-+ [K8s Test](./k8s-test/)
++ [K8s CRD](./k8s-crd/)
 + [Argo Workflows](./argo-workflow/)
 + [uptrace](./uptrace-slog/)

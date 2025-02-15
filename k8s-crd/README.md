@@ -1,5 +1,5 @@
-# K8s Test
-This Project demonstrates how to test Kubernetes API using Go client.
+# K8s CRD
+This Project demonstrates how to use client-go to interact with k8s CRD.
 
 ## Install CRD
 ```bash
