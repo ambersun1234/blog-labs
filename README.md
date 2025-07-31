@@ -20,3 +20,4 @@ This repo contains the programming labs for [ambersun1234.github.io](https://amb
 + [K8s CRD](./k8s-crd/)
 + [Argo Workflows](./argo-workflow/)
 + [uptrace](./uptrace-slog/)
++ [atlas](./atlas/)
