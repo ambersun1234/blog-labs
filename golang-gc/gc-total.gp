@@ -7,5 +7,5 @@ set autoscale
 set grid
 
 plot \
-'./gc-benchmark.txt' using 1:2 with linespoints title 'Total GC Time(Flood GC)', \
-'./gc-greentea-benchmark.txt' using 1:2 with linespoints title 'Total GC Time(GreenTea GC)'
+'./gc-benchmark.txt' using 1:2 with linespoints title 'Flood GC', \
+'./gc-greentea-benchmark.txt' using 1:2 with linespoints title 'GreenTea GC'
