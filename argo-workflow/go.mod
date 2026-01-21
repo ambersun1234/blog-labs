@@ -3,7 +3,7 @@ module myworkflows
 go 1.24.4
 
 require (
-	github.com/argoproj/argo-workflows/v3 v3.6.14
+	github.com/argoproj/argo-workflows/v3 v3.6.17
 	k8s.io/apimachinery v0.32.2
 	k8s.io/client-go v0.32.2
 )
