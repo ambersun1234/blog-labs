@@ -7,7 +7,7 @@ set grid y lc rgb "#e0e0e0" lt 1
 set border 3 back lc rgb "#555555"
 set tics nomirror
 
-set ylabel "Execution Time (ms)"
+set ylabel "Execution Time (nanoseconds)"
 set xlabel "Sequence (Sorted per 10 requests)"
 
 set autoscale x
