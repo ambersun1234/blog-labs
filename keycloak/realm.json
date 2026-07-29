@@ -1,0 +1,86 @@
+[
+  {
+    "realm": "customer",
+    "enabled": true,
+    "users": [
+      {
+        "username": "john",
+        "enabled": true,
+        "credentials": [
+          {
+            "type": "password",
+            "value": "john",
+            "temporary": false
+          }
+        ],
+        "clientRoles": {
+          "realm-management": [
+            "realm-admin"
+          ]
+        }
+      }
+    ],
+    "clients": [
+      {
+        "clientId": "ikae",
+        "enabled": true,
+        "publicClient": true,
+        "directAccessGrantsEnabled": true,
+        "standardFlowEnabled": true,
+        "redirectUris": ["https://instagram.com", "https://facebook.com", "https://threads.com", "http://localhost:8080/*"],
+        "webOrigins": ["+"]
+      },
+      {
+        "clientId": "warmart",
+        "enabled": true,
+        "publicClient": true,
+        "directAccessGrantsEnabled": true,
+        "standardFlowEnabled": true,
+        "redirectUris": ["https://instagram.com", "https://facebook.com", "https://threads.com", "http://localhost:8080/*"],
+        "webOrigins": ["+"]
+      }
+    ]
+  },
+  {
+    "realm": "employee",
+    "enabled": true,
+    "users": [
+      {
+        "username": "alice",
+        "enabled": true,
+        "credentials": [
+          {
+            "type": "password",
+            "value": "alice",
+            "temporary": false
+          }
+        ],
+        "clientRoles": {
+          "realm-management": [
+            "realm-admin"
+          ]
+        }
+      }
+    ],
+    "clients": [
+      {
+        "clientId": "dev",
+        "enabled": true,
+        "publicClient": true,
+        "directAccessGrantsEnabled": true,
+        "standardFlowEnabled": true,
+        "redirectUris": ["https://instagram.com", "https://facebook.com", "https://threads.com", "http://localhost:8080/*"],
+        "webOrigins": ["+"]
+      },
+      {
+        "clientId": "sales",
+        "enabled": true,
+        "publicClient": true,
+        "directAccessGrantsEnabled": true,
+        "standardFlowEnabled": true,
+        "redirectUris": ["https://instagram.com", "https://facebook.com", "https://threads.com", "http://localhost:8080/*"],
+        "webOrigins": ["+"]
+      }
+    ]
+  }
+]
