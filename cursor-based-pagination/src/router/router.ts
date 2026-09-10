@@ -8,18 +8,18 @@ export const router = express.Router();
 
 router.get("/", controller.healthHandler);
 router.get(
-  "/users/slow",
+  "/users/page",
   middleware.pageNumber(),
   middleware.pageLimit(),
   middleware.validation,
-  userController.getUsersSlow
+  userController.getUsersPageOffset
 );
 router.get(
-  "/users/fast",
+  "/users/cursor",
   middleware.cursor(),
   middleware.pageLimit(),
   middleware.validation,
-  userController.getUsersFast
+  userController.getUsersCursor
 );
 router.get(
   "/users/sort-name",

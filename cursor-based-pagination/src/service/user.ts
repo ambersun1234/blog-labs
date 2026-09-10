@@ -5,41 +5,47 @@ import { logger } from "../logger/logger";
 import { Errors } from "../constant/constant";
 
 export default {
-  getUsersSlow: async (
+  getUsersPageOffset: async (
     pageNumber: number,
     pageLimit: number
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
+    let connection;
     try {
-      const connection = newConnection();
-      result = await userDB.findUsersSlow(connection, pageNumber, pageLimit);
+      connection = newConnection();
+      result = await userDB.findUsersPageOffset(connection, pageNumber, pageLimit);
       logger.info("Successfully get users");
     } catch (error) {
       logger.error("Encounter error, abort", {
-        error: error,
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
       throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect()
     }
 
     return result;
   },
 
-  getUsersFast: async (
+  getUsersCursor: async (
     cursor: number,
     pageLimit: number
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
+    let connection;
     try {
-      const connection = newConnection();
-      result = await userDB.findUsersFast(connection, cursor, pageLimit);
+      connection = newConnection();
+      result = await userDB.findUsersCursor(connection, cursor, pageLimit);
       logger.info("Successfully get users");
     } catch (error) {
       logger.error("Encounter error, abort", {
-        error: error,
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
       throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect()
     }
 
     return result;
@@ -51,8 +57,9 @@ export default {
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
+    let connection;
     try {
-      const connection = newConnection();
+      connection = newConnection();
       result = await userDB.findUsersSortUsername(
         connection,
         username,
@@ -61,9 +68,11 @@ export default {
       logger.info("Successfully get users");
     } catch (error) {
       logger.error("Encounter error, abort", {
-        error: error,
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
       throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect()
     }
 
     return result;
@@ -76,8 +85,9 @@ export default {
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
+    let connection;
     try {
-      const connection = newConnection();
+      connection = newConnection();
       result = await userDB.findUsersSortMulti(
         connection,
         username,
@@ -87,9 +97,11 @@ export default {
       logger.info("Successfully get users");
     } catch (error) {
       logger.error("Encounter error, abort", {
-        error: error,
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
       throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect()
     }
 
     return result;

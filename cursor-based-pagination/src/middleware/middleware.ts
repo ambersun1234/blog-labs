@@ -29,7 +29,7 @@ export default {
   cursor: () =>
     query("cursor")
       .optional()
-      .isInt({ min: 1 })
+      .isInt({ min: 0 })
       .withMessage(Errors.InvalidCursor),
 
   username: () =>

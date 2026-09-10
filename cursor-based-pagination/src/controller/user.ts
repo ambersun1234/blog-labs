@@ -8,11 +8,11 @@ import { generateResponse } from "../share/share";
 import { matchedData } from "express-validator";
 
 export default {
-  getUsersSlow: async (req: Request, res: Response) => {
+  getUsersPageOffset: async (req: Request, res: Response) => {
     try {
       const data = matchedData(req);
 
-      const result = await userService.getUsersSlow(
+      const result = await userService.getUsersPageOffset(
         data.pageNumber,
         data.pageLimit
       );
@@ -27,11 +27,11 @@ export default {
     }
   },
 
-  getUsersFast: async (req: Request, res: Response) => {
+  getUsersCursor: async (req: Request, res: Response) => {
     try {
       const data = matchedData(req);
 
-      const result = await userService.getUsersFast(
+      const result = await userService.getUsersCursor(
         data.cursor || 0,
         data.pageLimit
       );

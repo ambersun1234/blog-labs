@@ -17,7 +17,7 @@ describe("Users", () => {
     logger.silent = true;
   });
 
-  describe("test getUsersSlow", () => {
+  describe("test getUsersPageOffset", () => {
     let conn: PrismaClient;
 
     beforeEach(async () => {
@@ -31,7 +31,7 @@ describe("Users", () => {
     });
 
     it("should get 2 users from page 1", async () => {
-      const result = await userService.getUsersSlow(1, 2);
+      const result = await userService.getUsersPageOffset(1, 2);
       const expectedResult = [
         {
           id: 1,
@@ -51,7 +51,7 @@ describe("Users", () => {
     });
 
     it("should get 2 users from page 100", async () => {
-      const result = await userService.getUsersSlow(100, 2);
+      const result = await userService.getUsersPageOffset(100, 2);
       const expectedResult = [
         {
           id: 199,
@@ -71,7 +71,7 @@ describe("Users", () => {
     });
   });
 
-  describe("test getUsersFast", () => {
+  describe("test getUsersCursor", () => {
     let conn: PrismaClient;
 
     beforeEach(async () => {
@@ -85,7 +85,7 @@ describe("Users", () => {
     });
 
     it("should get 2 users with cursor is 0", async () => {
-      const result = await userService.getUsersFast(0, 2);
+      const result = await userService.getUsersCursor(0, 2);
       const expectedResult = [
         {
           id: 1,
@@ -105,7 +105,7 @@ describe("Users", () => {
     });
 
     it("should get 2 users with cursor is 198", async () => {
-      const result = await userService.getUsersFast(198, 2);
+      const result = await userService.getUsersCursor(198, 2);
       const expectedResult = [
         {
           id: 199,

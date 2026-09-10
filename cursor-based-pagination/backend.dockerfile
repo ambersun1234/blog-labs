@@ -7,4 +7,5 @@ RUN npm run build
 
 FROM node:18-alpine AS final_layer
 COPY --from=build_layer /app/dist /dist
+RUN apk add --no-cache openssl
 ENTRYPOINT [ "node", "/dist/server.js" ]

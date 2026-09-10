@@ -50,6 +50,13 @@ module.exports = {
           ),
           to: "./query-engine-debian-openssl-3.0.x",
         },
+        {
+          from: path.join(
+            __dirname,
+            "./node_modules/.prisma/client/query-engine-linux-musl-arm64-openssl-3.0.x"
+          ),
+          to: "./query-engine-linux-musl-arm64-openssl-3.0.x",
+        }
       ],
     }),
   ],

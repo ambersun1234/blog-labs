@@ -8,19 +8,21 @@ def benchmark(startIndex):
         address
     )
     end_time = time.perf_counter_ns()
-    assert r.status_code == 200
+    if r.status_code != 200:
+        print(r.json())
+        assert r.status_code == 200
     f.write(f"{startIndex} {end_time - start_time}\n")
 
 if __name__ == "__main__":
     round = 1000
     with open("slow-benchmark.txt", "w") as f:
         for i in range(1, round + 1):
-            address = f"http://localhost:3000/users/slow?pageNumber={i}&pageLimit={10}"
+            address = f"http://localhost:3000/users/page?pageNumber={i}&pageLimit={10}"
             benchmark((i - 1) * 10)
 
     round = 9990
     with open("fast-benchmark.txt", "w") as f:
         for i in range(0, round + 1, 10):
             # cursor range from 0 to 9990
-            address = f"http://localhost:3000/users/fast?cursor={i * 9}&pageLimit={10}"
+            address = f"http://localhost:3000/users/cursor?cursor={i * 9}&pageLimit={10}"
             benchmark(i + 1)

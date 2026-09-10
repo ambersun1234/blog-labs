@@ -4,7 +4,7 @@ import { PrismaTransaction } from "../type/type";
 import { UserResponse } from "../type/response";
 
 export default {
-  findUsersSlow: async (
+  findUsersPageOffset: async (
     conn: PrismaClient,
     pageNumber: number,
     pageLimit: number
@@ -15,7 +15,7 @@ export default {
         `;
   },
 
-  findUsersFast: async (
+  findUsersCursor: async (
     conn: PrismaClient,
     cursor: number,
     pageLimit: number

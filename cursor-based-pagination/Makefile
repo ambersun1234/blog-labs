@@ -13,15 +13,15 @@ integration-test:
 	@npx jest --bail --testMatch='./**/integrationtest/**/*.test.ts' --coverage
 
 benchmark-sort:
-	@python3 benchmark-sort.py
+	@uv run benchmark-sort.py
 	@gnuplot ./benchmark-sort-plot.gp
 
 benchmark:
-	@python3 benchmark.py
+	@uv run benchmark.py
 	@gnuplot ./benchmark-plot.gp
 
 demo: demo-down
-	@docker-compose up -d
+	@docker-compose up -d --build
 
 demo-down:
 	@docker-compose down
@@ -30,6 +30,7 @@ demo-remove: demo-down
 	@docker-compose rm > /dev/null 2>&1
 
 dev: docker-start
+	@npm i
 	@npm run dev-server
 
 docker-start:
@@ -62,11 +63,11 @@ docker-exec:
 
 prisma:
 	@export DATABASE_URL=mysql://root:root@localhost:6630/$(DB_NAME) && \
-		npx prisma generate --schema $(SCHEMA_LOCATION)
+		npx prisma@4.16.2 generate --schema $(SCHEMA_LOCATION)
 
 migrate-prisma:
 	@export DATABASE_URL=mysql://root:root@localhost:6630/$(DB_NAME) && \
-		npx prisma migrate dev --name init --schema $(SCHEMA_LOCATION)
+		npx prisma@4.16.2 migrate dev --name init --schema $(SCHEMA_LOCATION)
 
 hook:
 	@bash ./scripts/install-hook.sh

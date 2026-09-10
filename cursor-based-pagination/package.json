@@ -8,7 +8,7 @@
     "check": "prettier --check \"./src/**/*.{js,jsx,ts,tsx,html,scss}\"",
     "pretty": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,html,scss}\"",
     "build": "rm -rf dist && npm run prisma && npx webpack",
-    "prisma": "npx prisma generate --schema ./src/database/prisma/schema.prisma",
+    "prisma": "npx prisma@4.16.2 generate --schema ./src/database/prisma/schema.prisma",
     "dev-server": "concurrently \"npx tsc --watch\" \"nodemon -q ./dist/server.js\""
   },
   "repository": {
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/ambersun1234/simple-restful-lab#readme",
   "devDependencies": {
     "@jest/globals": "29.7.0",
-    "@prisma/client": "4.16.2",
+    "@prisma/client": "^4.16.2",
     "@types/express": "^4.17.17",
     "@types/node": "^20.3.2",
     "concurrently": "^8.2.0",
@@ -38,7 +38,7 @@
     "node-mocks-http": "1.13.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
-    "prisma": "4.16.2",
+    "prisma": "^4.16.2",
     "prismajs": "^1.0.2",
     "supertest": "6.3.3",
     "ts-jest": "29.1.1",
