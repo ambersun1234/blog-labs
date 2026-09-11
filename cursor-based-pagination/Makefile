@@ -3,6 +3,9 @@ CONTAINER_NAME=db
 DB_NAME=restdb
 CSV_NAME=./user.csv
 
+generate-csv:
+	@python3 generate-user-csv.py --count 200000 --output user.csv
+
 test:
 	@npx jest --bail --coverage
 
@@ -11,6 +14,10 @@ unit-test:
 
 integration-test:
 	@npx jest --bail --testMatch='./**/integrationtest/**/*.test.ts' --coverage
+
+benchmark-deferred-join:
+	@taskset 0xf uv run benchmark-deferred-join.py
+	@gnuplot ./benchmark-deferred-join.gp
 
 benchmark-sort:
 	@uv run benchmark-sort.py

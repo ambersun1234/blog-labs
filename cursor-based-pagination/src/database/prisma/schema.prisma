@@ -11,6 +11,8 @@ generator client {
 
 model User {
     id         Int      @id @default(autoincrement())
-    username   String
+    username   String   @unique(map: "si_username_key")
     created_at DateTime @default(now())
+
+    @@index([username, id], map: "ci_username_id_key")
 }

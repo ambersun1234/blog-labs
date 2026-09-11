@@ -21,6 +21,36 @@ router.get(
   middleware.validation,
   userController.getUsersCursor
 );
+// deferred join
+router.get(
+  "/users/page/order",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersPageOffsetOrderUsername
+);
+router.get(
+  "/users/cursor/order",
+  middleware.cursor(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersCursorOrderUsername
+);
+router.get(
+  "/users/deferred/pi",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersDeferredJoinPi
+);
+router.get(
+  "/users/deferred/si",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersDeferredJoinSi
+);
+// sorted fields
 router.get(
   "/users/sort-name",
   middleware.username(),

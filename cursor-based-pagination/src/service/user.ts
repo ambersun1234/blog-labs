@@ -14,7 +14,11 @@ export default {
     let connection;
     try {
       connection = newConnection();
-      result = await userDB.findUsersPageOffset(connection, pageNumber, pageLimit);
+      result = await userDB.findUsersPageOffset(
+        connection,
+        pageNumber,
+        pageLimit
+      );
       logger.info("Successfully get users");
     } catch (error) {
       logger.error("Encounter error, abort", {
@@ -22,7 +26,34 @@ export default {
       });
       throw new Error(Errors.InternalServerError);
     } finally {
-      await connection?.$disconnect()
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersPageOffsetOderUsername: async (
+    pageNumber: number,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersPageOffsetOrderUsername(
+        connection,
+        pageNumber,
+        pageLimit
+      );
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
     }
 
     return result;
@@ -45,7 +76,91 @@ export default {
       });
       throw new Error(Errors.InternalServerError);
     } finally {
-      await connection?.$disconnect()
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersCursorOrderUsername: async (
+    lastId: number,
+    lastUsername: string,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersCursorOrderUsername(
+        connection,
+        lastUsername,
+        lastId,
+        pageLimit
+      );
+      console.log(result);
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersDeferredJoinPi: async (
+    pageNumber: number,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersDeferredJoinPi(
+        connection,
+        pageNumber,
+        pageLimit
+      );
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersDeferredJoinSi: async (
+    pageNumber: number,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersDeferredJoinSi(
+        connection,
+        pageNumber,
+        pageLimit
+      );
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
     }
 
     return result;
@@ -72,7 +187,7 @@ export default {
       });
       throw new Error(Errors.InternalServerError);
     } finally {
-      await connection?.$disconnect()
+      await connection?.$disconnect();
     }
 
     return result;
@@ -101,7 +216,7 @@ export default {
       });
       throw new Error(Errors.InternalServerError);
     } finally {
-      await connection?.$disconnect()
+      await connection?.$disconnect();
     }
 
     return result;

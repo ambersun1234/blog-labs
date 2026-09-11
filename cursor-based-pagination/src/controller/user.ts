@@ -46,6 +46,84 @@ export default {
     }
   },
 
+  getUsersPageOffsetOrderUsername: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersPageOffsetOderUsername(
+        data.pageNumber,
+        data.pageLimit
+      );
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
+  getUsersCursorOrderUsername: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersCursorOrderUsername(
+        data.lastId || 0,
+        data.lastUsername || "",
+        data.pageLimit
+      );
+      console.log(result);
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
+  getUsersDeferredJoinPi: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersDeferredJoinPi(
+        data.pageNumber,
+        data.pageLimit
+      );
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
+  getUsersDeferredJoinSi: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersDeferredJoinSi(
+        data.pageNumber,
+        data.pageLimit
+      );
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
   getUsersSortUsername: async (req: Request, res: Response) => {
     try {
       const data = matchedData(req);

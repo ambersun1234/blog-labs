@@ -5,12 +5,12 @@ This repo contains the minimal Node.js Backend RESTful API
 ## Prerequisites
 
 ```shell
-$ make docker-create
-$ make docker-start
+$ make demo
 ```
 
 ## Benchmark
 
+### Page Offset vs. Cursor Based
 ![](./benchmark.png)
 
 ```shell
@@ -18,6 +18,15 @@ $ make benchmark
 $ eog ./benchmark.png
 ```
 
+### Page Offset vs. Deferred Join
+![](./benchmark-deferred-join.png)
+
+```shell
+$ make benchmark-deferred-join
+$ eog ./benchmark-deferred-join.png
+```
+
+### Cursor Based Pagination with Sorted Fields
 ![](./benchmark-sort.png)
 
 ```shell
