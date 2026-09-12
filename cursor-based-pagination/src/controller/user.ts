@@ -86,11 +86,11 @@ export default {
     }
   },
 
-  getUsersDeferredJoinPi: async (req: Request, res: Response) => {
+  getUsersDeferredJoinPiOrder: async (req: Request, res: Response) => {
     try {
       const data = matchedData(req);
 
-      const result = await userService.getUsersDeferredJoinPi(
+      const result = await userService.getUsersDeferredJoinPiOrder(
         data.pageNumber,
         data.pageLimit
       );
@@ -105,11 +105,49 @@ export default {
     }
   },
 
-  getUsersDeferredJoinSi: async (req: Request, res: Response) => {
+  getUsersDeferredJoinSiOrder: async (req: Request, res: Response) => {
     try {
       const data = matchedData(req);
 
-      const result = await userService.getUsersDeferredJoinSi(
+      const result = await userService.getUsersDeferredJoinSiOrder(
+        data.pageNumber,
+        data.pageLimit
+      );
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
+  getUsersDeferredJoinPiSubquery: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersDeferredJoinPiSubquery(
+        data.pageNumber,
+        data.pageLimit
+      );
+      res
+        .status(StatusCodes.OK)
+        .send(generateResponse(SuccessMessages.GetUsers, result));
+    } catch (error) {
+      logger.error(Errors.InternalServerError, { error: error });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send(generateResponse(Errors.InternalServerError));
+    }
+  },
+
+  getUsersDeferredJoinSiSubquery: async (req: Request, res: Response) => {
+    try {
+      const data = matchedData(req);
+
+      const result = await userService.getUsersDeferredJoinSiSubquery(
         data.pageNumber,
         data.pageLimit
       );

@@ -16,3 +16,9 @@ model User {
 
     @@index([username, id], map: "ci_username_id_key")
 }
+
+model Post {
+    id         Int      @id @default(autoincrement())
+    postname   String   @unique(map: "si_postname_key")
+    created_at DateTime @default(now())
+}

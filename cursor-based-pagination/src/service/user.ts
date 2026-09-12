@@ -112,7 +112,7 @@ export default {
     return result;
   },
 
-  getUsersDeferredJoinPi: async (
+  getUsersDeferredJoinPiOrder: async (
     pageNumber: number,
     pageLimit: number
   ): Promise<UserResponse[]> => {
@@ -121,7 +121,7 @@ export default {
     let connection;
     try {
       connection = newConnection();
-      result = await userDB.findUsersDeferredJoinPi(
+      result = await userDB.findUsersDeferredJoinPiOrder(
         connection,
         pageNumber,
         pageLimit
@@ -139,7 +139,7 @@ export default {
     return result;
   },
 
-  getUsersDeferredJoinSi: async (
+  getUsersDeferredJoinSiOrder: async (
     pageNumber: number,
     pageLimit: number
   ): Promise<UserResponse[]> => {
@@ -148,7 +148,61 @@ export default {
     let connection;
     try {
       connection = newConnection();
-      result = await userDB.findUsersDeferredJoinSi(
+      result = await userDB.findUsersDeferredJoinSiOrder(
+        connection,
+        pageNumber,
+        pageLimit
+      );
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersDeferredJoinPiSubquery: async (
+    pageNumber: number,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersDeferredJoinPiSubquery(
+        connection,
+        pageNumber,
+        pageLimit
+      );
+      logger.info("Successfully get users");
+    } catch (error) {
+      logger.error("Encounter error, abort", {
+        error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
+      });
+      throw new Error(Errors.InternalServerError);
+    } finally {
+      await connection?.$disconnect();
+    }
+
+    return result;
+  },
+
+  getUsersDeferredJoinSiSubquery: async (
+    pageNumber: number,
+    pageLimit: number
+  ): Promise<UserResponse[]> => {
+    let result: UserResponse[] = [];
+
+    let connection;
+    try {
+      connection = newConnection();
+      result = await userDB.findUsersDeferredJoinSiSubquery(
         connection,
         pageNumber,
         pageLimit

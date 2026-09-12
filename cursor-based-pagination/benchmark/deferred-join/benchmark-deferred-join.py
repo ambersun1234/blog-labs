@@ -1,4 +1,4 @@
-import json
+import os
 import requests
 import time
 
@@ -19,39 +19,42 @@ def benchmark(startIndex):
 
 if __name__ == "__main__":
     deferred_join = "deferred-join"
+    
+    cdir = os.path.dirname(os.path.abspath(__file__))
 
-    limit = 1000
+    limit = 10000
 
     page_start_round = 1
-    round_offset = 100
-    page_end_round = 10000
+    round_offset = 5
+    page_end_round = 301
 
-    with open(f"{deferred_join}-page-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-page-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
             address = f"http://localhost:3000/users/page/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
-    with open(f"{deferred_join}-pi-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-pi-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
-            address = f"http://localhost:3000/users/deferred/pi?pageNumber={i}&pageLimit={limit}"
+            address = f"http://localhost:3000/users/deferred/pi/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
-    with open(f"{deferred_join}-si-benchmark.txt", "w") as f:
+
+    with open(os.path.join(cdir, f"{deferred_join}-si-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
-            address = f"http://localhost:3000/users/deferred/si?pageNumber={i}&pageLimit={limit}"
+            address = f"http://localhost:3000/users/deferred/si/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
-    with open(f"{deferred_join}-cursor-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-cursor-benchmark.txt"), "w") as f:
         last_username = None
         last_id = None
 
-        for page in range(page_start_round, page_end_round + 1, round_offset):
-            if last_username is None and last_id is None:
+        for i in range(page_start_round, page_end_round + 1, round_offset):
+            if last_username is None or last_id is None:
                 address = f"http://localhost:3000/users/cursor/order?pageLimit={limit}"
             else:
                 address = f"http://localhost:3000/users/cursor/order?lastUsername={last_username}&lastId={last_id}&pageLimit={limit}"
 
-            r = benchmark(page * limit)
+            r = benchmark((i - 1) * limit)
             data = r.json()
 
             last_item = data['data'][-1]

@@ -37,18 +37,33 @@ router.get(
   userController.getUsersCursorOrderUsername
 );
 router.get(
-  "/users/deferred/pi",
+  "/users/deferred/pi/order",
   middleware.pageNumber(),
   middleware.pageLimit(),
   middleware.validation,
-  userController.getUsersDeferredJoinPi
+  userController.getUsersDeferredJoinPiOrder
 );
 router.get(
-  "/users/deferred/si",
+  "/users/deferred/si/order",
   middleware.pageNumber(),
   middleware.pageLimit(),
   middleware.validation,
-  userController.getUsersDeferredJoinSi
+  userController.getUsersDeferredJoinSiOrder
+);
+// deferred join sub query
+router.get(
+  "/users/deferred/pi/subquery",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersDeferredJoinPiSubquery
+);
+router.get(
+  "/users/deferred/si/subquery",
+  middleware.pageNumber(),
+  middleware.pageLimit(),
+  middleware.validation,
+  userController.getUsersDeferredJoinSiSubquery
 );
 // sorted fields
 router.get(
