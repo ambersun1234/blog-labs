@@ -1,4 +1,4 @@
-import json
+import os
 import requests
 import time
 
@@ -19,6 +19,8 @@ def benchmark(startIndex):
 
 if __name__ == "__main__":
     deferred_join = "deferred-join"
+    
+    cdir = os.path.dirname(os.path.abspath(__file__))
 
     limit = 1000
 
@@ -26,19 +28,19 @@ if __name__ == "__main__":
     round_offset = 100
     page_end_round = 10000
 
-    with open(f"{deferred_join}-page-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-page-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
             address = f"http://localhost:3000/users/page/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
-    with open(f"{deferred_join}-pi-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-pi-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
-            address = f"http://localhost:3000/users/deferred/pi?pageNumber={i}&pageLimit={limit}"
+            address = f"http://localhost:3000/users/deferred/pi/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
-    with open(f"{deferred_join}-si-benchmark.txt", "w") as f:
+    with open(os.path.join(cdir, f"{deferred_join}-si-benchmark.txt"), "w") as f:
         for i in range(page_start_round, page_end_round + 1, round_offset):
-            address = f"http://localhost:3000/users/deferred/si?pageNumber={i}&pageLimit={limit}"
+            address = f"http://localhost:3000/users/deferred/si/order?pageNumber={i}&pageLimit={limit}"
             benchmark((i - 1) * limit)
 
     with open(f"{deferred_join}-cursor-benchmark.txt", "w") as f:

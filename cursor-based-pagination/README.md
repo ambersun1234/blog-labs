@@ -11,7 +11,7 @@ $ make demo
 ## Benchmark
 
 ### Page Offset vs. Cursor Based
-![](./benchmark.png)
+![](./benchmark/cursor/benchmark.png)
 
 ```shell
 $ make benchmark
@@ -19,15 +19,19 @@ $ eog ./benchmark.png
 ```
 
 ### Page Offset vs. Deferred Join
-![](./benchmark-deferred-join.png)
+![](./benchmark/deferred-join/benchmark-deferred-join.png)
 
 ```shell
 $ make benchmark-deferred-join
 $ eog ./benchmark-deferred-join.png
 ```
 
+![](./benchmark/deferred-join-subquery/benchmark-deferred-join-withoutsort-subquery.png)
+![](./benchmark/deferred-join-subquery/benchmark-deferred-join-withsort-desc-subquery.png)
+![](./benchmark/deferred-join-subquery/benchmark-deferred-join-withsort-subquery.png)
+
 ### Cursor Based Pagination with Sorted Fields
-![](./benchmark-sort.png)
+![](./benchmark/cursor/benchmark-sort.png)
 
 ```shell
 $ make benchmark-sort

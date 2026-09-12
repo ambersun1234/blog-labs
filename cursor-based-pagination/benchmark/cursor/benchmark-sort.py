@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 from datetime import date
 
 def benchmark(startIndex):
@@ -15,12 +16,14 @@ def benchmark(startIndex):
 if __name__ == "__main__":
     round = 9999
 
-    with open("benchmark-sort0.txt", "w") as f:
+    cdir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(cdir, "benchmark-sort0.txt"), "w") as f:
         for i in range(0, round, 10):
             address = f"http://localhost:3000/users/fast?cursor={i}&pageLimit={10}"
             benchmark(i)
 
-    with open("benchmark-sort1.txt", "w") as f:
+    with open(os.path.join(cdir, "benchmark-sort1.txt"), "w") as f:
         username = ""
         for i in range(0, round - 10, 10):
             # /users/sort-name?username=xxx&pageLimit=10
@@ -29,7 +32,7 @@ if __name__ == "__main__":
             
             username = response["data"][9]["username"]
 
-    with open("benchmark-sort2.txt", "w") as f:
+    with open(os.path.join(cdir, "benchmark-sort2.txt"), "w") as f:
         username = ""
         createdAt = date(3020,1,1)
         for i in range(0, round - 10, 10):
