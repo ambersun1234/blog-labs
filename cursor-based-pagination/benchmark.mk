@@ -13,7 +13,7 @@ benchmark-deferred-join-subquery:
 	@docker restart rest-db
 	@sleep 5
 	@taskset 0xf uv run ./benchmark/deferred-join-subquery/benchmark-deferred-join-subquery.py --index si --type sortasc
-	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-subquery.gp
+	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-withsort-subquery.gp
 	@cd ../..
 	@echo "testing sortdesc"
 	@docker restart rest-db
@@ -22,7 +22,7 @@ benchmark-deferred-join-subquery:
 	@docker restart rest-db
 	@sleep 5
 	@taskset 0xf uv run ./benchmark/deferred-join-subquery/benchmark-deferred-join-subquery.py --index si --type sortdesc
-	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-subquery.gp
+	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-withsort-desc-subquery.gp
 	@cd ../..
 	@echo "testing nosort"
 	@docker restart rest-db
@@ -31,7 +31,7 @@ benchmark-deferred-join-subquery:
 	@docker restart rest-db
 	@sleep 5
 	@taskset 0xf uv run ./benchmark/deferred-join-subquery/benchmark-deferred-join-subquery.py --index si --type nosort
-	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-subquery.gp
+	@cd ./benchmark/deferred-join-subquery && gnuplot benchmark-deferred-join-withoutsort-subquery.gp
 	@cd ../..
 
 benchmark-sort:

@@ -2,6 +2,7 @@ import os
 import requests
 import time
 import argparse
+import sys
 
 
 def benchmark(startIndex):
@@ -32,13 +33,13 @@ if __name__ == "__main__":
 
     cdir = os.path.dirname(os.path.abspath(__file__))
 
-    limit = 10000
+    limit = 100
 
     page_start_round = 1
-    round_offset = 10
-    page_end_round = 301
+    round_offset = 100
+    page_end_round = 30001
 
-    match args.index:
+    match args.type:
         case "sortasc":
             bench_type = "withsort"
 
@@ -46,14 +47,18 @@ if __name__ == "__main__":
                 case "pi":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-pi-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}&order=sa"
                             benchmark((i - 1) * limit)
             
                 case "si":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-si-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}&order=sa"
                             benchmark((i - 1) * limit)
+                
+                case _:
+                    print("unknown index")
+                    sys.exit(1)
 
         case "sortdesc":
             bench_type = "withsort-desc"
@@ -62,14 +67,18 @@ if __name__ == "__main__":
                 case "pi":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-pi-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}&order=sd"
                             benchmark((i - 1) * limit)
             
                 case "si":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-si-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}&order=sd"
                             benchmark((i - 1) * limit)
+
+                case _:
+                    print("unknown index")
+                    sys.exit(1)
 
         case "nosort":
             bench_type = "withoutsort"
@@ -78,11 +87,19 @@ if __name__ == "__main__":
                 case "pi":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-pi-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/pi/subquery?pageNumber={i}&pageLimit={limit}&order=n"
                             benchmark((i - 1) * limit)
             
                 case "si":
                     with open(os.path.join(cdir, f"{deferred_join_subquery}-si-{bench_type}-benchmark.txt"), "w") as f:
                         for i in range(page_start_round, page_end_round + 1, round_offset):
-                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}"
+                            address = f"http://localhost:3000/users/deferred/si/subquery?pageNumber={i}&pageLimit={limit}&order=n"
                             benchmark((i - 1) * limit)
+
+                case _:
+                    print("unknown index")
+                    sys.exit(1)
+
+        case _:
+            print("unknown type")
+            sys.exit(1)

@@ -130,7 +130,8 @@ export default {
 
       const result = await userService.getUsersDeferredJoinPiSubquery(
         data.pageNumber,
-        data.pageLimit
+        data.pageLimit,
+        data.order
       );
       res
         .status(StatusCodes.OK)
@@ -149,7 +150,8 @@ export default {
 
       const result = await userService.getUsersDeferredJoinSiSubquery(
         data.pageNumber,
-        data.pageLimit
+        data.pageLimit,
+        data.order
       );
       res
         .status(StatusCodes.OK)

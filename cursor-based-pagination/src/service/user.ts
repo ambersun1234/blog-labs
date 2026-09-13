@@ -168,7 +168,8 @@ export default {
 
   getUsersDeferredJoinPiSubquery: async (
     pageNumber: number,
-    pageLimit: number
+    pageLimit: number,
+    order: string
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
@@ -178,7 +179,8 @@ export default {
       result = await userDB.findUsersDeferredJoinPiSubquery(
         connection,
         pageNumber,
-        pageLimit
+        pageLimit,
+        order
       );
       logger.info("Successfully get users");
     } catch (error) {
@@ -195,7 +197,8 @@ export default {
 
   getUsersDeferredJoinSiSubquery: async (
     pageNumber: number,
-    pageLimit: number
+    pageLimit: number,
+    order: string
   ): Promise<UserResponse[]> => {
     let result: UserResponse[] = [];
 
@@ -205,7 +208,8 @@ export default {
       result = await userDB.findUsersDeferredJoinSiSubquery(
         connection,
         pageNumber,
-        pageLimit
+        pageLimit,
+        order
       );
       logger.info("Successfully get users");
     } catch (error) {

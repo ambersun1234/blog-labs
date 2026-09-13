@@ -1,7 +1,6 @@
+import { UserResponse } from "./../type/response";
 import { PrismaClient } from "@prisma/client";
-
 import { PrismaTransaction } from "../type/type";
-import { UserResponse } from "../type/response";
 
 export default {
   findUsersPageOffset: async (
@@ -104,35 +103,85 @@ export default {
   findUsersDeferredJoinPiSubquery: async (
     conn: PrismaClient,
     pageNumber: number,
-    pageLimit: number
+    pageLimit: number,
+    order: string
   ): Promise<UserResponse[]> => {
     const startPoint = (pageNumber - 1) * pageLimit;
-    return conn.$queryRaw<UserResponse[]>`
-      SELECT p.* FROM Post p JOIN (
-        SELECT id FROM Post
-        FORCE INDEX (PRIMARY)
-        ORDER BY id, username
-        LIMIT ${pageLimit} OFFSET ${startPoint}
-      ) temp ON p.id = temp.id
-      ORDER BY id, username
-    `;
+
+    switch (order) {
+      case "sa":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (PRIMARY)
+            ORDER BY id ASC, postname ASC
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+          ORDER BY id ASC, postname ASC
+        `;
+      case "sd":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (PRIMARY)
+            ORDER BY id DESC, postname DESC
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+          ORDER BY id DESC, postname DESC
+        `;
+      case "n":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (PRIMARY)
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+        `;
+      default:
+        return Promise.resolve() as unknown as UserResponse[];
+    }
   },
 
   findUsersDeferredJoinSiSubquery: async (
     conn: PrismaClient,
     pageNumber: number,
-    pageLimit: number
+    pageLimit: number,
+    order: string
   ): Promise<UserResponse[]> => {
     const startPoint = (pageNumber - 1) * pageLimit;
-    return conn.$queryRaw<UserResponse[]>`
-      SELECT p.* FROM Post p JOIN (
-        SELECT id FROM Post
-        FORCE INDEX (si_postname_key)
-        ORDER BY id, username
-        LIMIT ${pageLimit} OFFSET ${startPoint}
-      ) temp ON p.id = temp.id
-      ORDER BY id, username
-    `;
+
+    switch (order) {
+      case "sa":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (si_postname_key)
+            ORDER BY id ASC, postname ASC
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+          ORDER BY id ASC, postname ASC
+        `;
+      case "sd":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (si_postname_key)
+            ORDER BY id DESC, postname DESC
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+          ORDER BY id DESC, postname DESC
+        `;
+      case "n":
+        return conn.$queryRaw<UserResponse[]>`
+          SELECT p.* FROM Post p JOIN (
+            SELECT id FROM Post
+            FORCE INDEX (si_postname_key)
+            LIMIT ${pageLimit} OFFSET ${startPoint}
+          ) temp ON p.id = temp.id
+        `;
+      default:
+        return Promise.resolve() as unknown as UserResponse[];
+    }
   },
 
   findUsersSortUsername: async (
